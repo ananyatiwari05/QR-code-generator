@@ -1,0 +1,92 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="header-section">
+    <div class="icon">📱</div>
+    <h1>QR Code Generator</h1>
+    <p class="subtitle">Transform any URL into a QR code instantly</p>
+  </div>
+
+  <div class="form-section">
+    <form action="/generate" method="POST" class="qr-form">
+      <div class="input-group">
+        <input 
+          type="url" 
+          name="url" 
+          placeholder="Enter your URL here (e.g., https://example.com)" 
+          value="<%= url %>"
+          required
+          class="url-input"
+        >
+        <button type="submit" class="generate-btn">
+          <span class="btn-icon">⚡</span>
+          Generate QR Code
+        </button>
+      </div>
+    </form>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-message">
+        <span class="error-icon">⚠️</span>
+        <%= error %>
+      </div>
+    <% } %>
+  </div>
+
+  <% if (typeof imageGenerated !== 'undefined' && imageGenerated) { %>
+    <div class="result-section">
+      <div class="result-header">
+        <h2>Your QR Code is Ready! 🎉</h2>
+        <p>Scan with any QR code reader or camera </p>
+      </div>
+      
+      <div class="qr-display">
+        <div class="qr-container">
+          <img src="/qr-image.png" alt="Generated QR Code" class="qr-image">
+          <div class="qr-overlay">
+            <div class="scan-animation"></div>
+          </div>
+        </div>
+        
+        <div class="url-display">
+          <span class="url-label">URL:</span>
+          <span class="url-text"><%= url %></span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <a href="/download?url=<%= encodeURIComponent(url) %>" class="download-btn">
+          <span class="btn-icon">💾</span>
+          Download QR Code
+        </a>
+        <button onclick="generateNew()" class="new-btn">
+          <span class="btn-icon">🔄</span>
+          Generate New
+        </button>
+      </div>
+    </div>
+  <% } %>
+
+</div>
+
+<script>
+  function generateNew() {
+    document.querySelector('.url-input').focus();
+    document.querySelector('.url-input').select();
+  }
+
+  // Add some interactive effects
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlInput = document.querySelector('.url-input');
+    
+    urlInput.addEventListener('focus', function() {
+      this.parentElement.classList.add('focused');
+    });
+    
+    urlInput.addEventListener('blur', function() {
+      this.parentElement.classList.remove('focused');
+    });
+  });
+</script>
+
+<%- include('partials/footer') %>
