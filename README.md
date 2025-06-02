@@ -2,7 +2,7 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/6ace4be1-5ff8-4316-91f0-7b34dc45014a" width="150" />
   <p>Scan this QR to be directed to the website 😉</p>
-  <h3>OR click on: https://qr-code-generator-dr0q.onrender.com</h3>
+  <h3>OR click on: https://qr-code-generator-1-txsr.onrender.com</h3>
 </div>
 <br>
 
